@@ -31,8 +31,7 @@ class UserProductsScreens extends StatelessWidget {
       drawer: AppDrawer(),
       body: RefreshIndicator(
         onRefresh: ()=>_refreshProducts(context),
-     
-        child: Container(
+             child: Container(
           padding: EdgeInsets.all(5),
           child: ListView.builder(
             itemCount: productsData.items.length,
