@@ -51,6 +51,10 @@ class Orders with ChangeNotifier {
       );
       notifyListeners();
     }
-    catch(err) {}
+    catch(err) {
+
+      print(err);
+
+    }
   }
 }
