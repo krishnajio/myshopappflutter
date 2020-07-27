@@ -75,9 +75,9 @@ class _OrderButtonState extends State<OrderButton> {
   Widget build(BuildContext context)   {
     var _isLoading = false;
     return FlatButton(
-      child: Text('ORDER NOW'),
+      child:  _isLoading ? CircularProgressIndicator() : Text('ORDER NOW'),
       color: Theme.of(context).primaryColor,
-      onPressed: (widget.cart.totalAmount >=0 || _isLoading ) ? null :  () async {
+      onPressed: (widget.cart.totalAmount <=0 || _isLoading == true ) ? null :  () async {
         setState(() {
           _isLoading= true;
         });
