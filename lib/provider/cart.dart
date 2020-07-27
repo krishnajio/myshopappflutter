@@ -48,7 +48,6 @@ class Cart with ChangeNotifier {
     if (!_items.containsKey(productID)) {
       return;
     }
-
     if (_items[productID].qty > 1 ) {
       _items.update(
         productID,
