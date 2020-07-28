@@ -8,9 +8,11 @@ import './screens/orders_screen.dart';
 import './screens/cart_screen.dart';
 import './screens/user_products_screen.dart';
 import './screens/edit_products.dart';
+import './screens/auth_screen.dart';
 import './provider/products.dart';
 import './provider/cart.dart';
 import './provider/orders.dart';
+import './provider/auth.dart';
 
 
 void main() {
@@ -28,13 +30,18 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider(
         create: (context)=>Orders(),
       ),
+      ChangeNotifierProvider(
+        create: (context)=>Auth(),
+      ),
+
     ],
       child: MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.purple,
           accentColor: Colors.amber,
         ),
-        home: ProductOverviewScreen(),
+       // home: ProductOverviewScreen(),
+        home: AuthScreen(),
         routes: {
           ProductDetailScreen.routeName : (ctx) => ProductDetailScreen(),
           CartScreen.routeName : (ctx)=>CartScreen(),
