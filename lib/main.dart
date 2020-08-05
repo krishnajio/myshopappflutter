@@ -14,41 +14,44 @@ import './provider/cart.dart';
 import './provider/orders.dart';
 import './provider/auth.dart';
 
-
 void main() {
   runApp(MyApp());
 }
+
 //devlop bt krishna
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  MultiProvider( providers: [
-    ChangeNotifierProvider(
-    create: (context) => Products()),
-      ChangeNotifierProvider(
-          create: (context) => Cart()),
-      ChangeNotifierProvider(
-        create: (context)=>Orders(),
-      ),
-      ChangeNotifierProvider(
-        create: (context)=>Auth(),
-      ),
-
-    ],
-      child: MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.amber,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => Auth(),
         ),
-       // home: ProductOverviewScreen(),
-        home: AuthScreen(),
-        routes: {
-          ProductDetailScreen.routeName : (ctx) => ProductDetailScreen(),
-          CartScreen.routeName : (ctx)=>CartScreen(),
-          OrdersScreen.routeName : (ctx)=> OrdersScreen(),
-          UserProductsScreens.routeName : (ctx)=>UserProductsScreens(),
-          EditProductScreen.routeName : (ctx)=>EditProductScreen(),
-        },
+        ChangeNotifierProxyProvider<Auth, Products>(
+          update: (ctx, auth, previousProducts) => Products(auth.token,
+              previousProducts == null ? [] : previousProducts.items,auth.userId),
+        ),
+        ChangeNotifierProvider(create: (context) => Cart()),
+        ChangeNotifierProxyProvider<Auth,Orders>(
+          update: (ctx,auth,previoudOrders)=>Orders(auth.token,previoudOrders == null ? [] : previoudOrders.orders),
+        ),
+      ],
+      child: Consumer<Auth>(
+        builder: (ctx, authData, _) => MaterialApp(
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+            accentColor: Colors.amber,
+          ),
+          // home: ProductOverviewScreen(),
+          home: authData.isAuth ? ProductOverviewScreen() : AuthScreen(),
+          routes: {
+            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+            CartScreen.routeName: (ctx) => CartScreen(),
+            OrdersScreen.routeName: (ctx) => OrdersScreen(),
+            UserProductsScreens.routeName: (ctx) => UserProductsScreens(),
+            EditProductScreen.routeName: (ctx) => EditProductScreen(),
+          },
+        ),
       ),
     );
   }

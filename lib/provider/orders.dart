@@ -19,13 +19,17 @@ class OrderItem {
 class Orders with ChangeNotifier {
   List<OrderItem> _orders = [];
 
+  final String token;
+
+  Orders(this.token,this._orders);
+
   List<OrderItem> get orders {
     return [..._orders];
   }
 
   Future<void> fetchAndSetOrders()  async {
     try{
-      const url = 'https://myshopapp-1caec.firebaseio.com/orders.json';
+      final url = 'https://myshopapp-1caec.firebaseio.com/orders.json?auth=$token';
       final response = await http.get(url);
       final List<OrderItem> loadedOrders = [];
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
