@@ -20,15 +20,19 @@ class AuthScreen extends StatelessWidget {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0, 1],
-              ),
+//              gradient: LinearGradient(
+//               colors: [
+//                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
+//                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+//                ],
+//
+//                begin: Alignment.topLeft,
+//                end: Alignment.bottomRight,
+//                stops: [0, 1],
+//              ),
+              image: DecorationImage(
+                  image: AssetImage('assetes/images/bgimg1.jpg'), fit: BoxFit.cover
+              )
             ),
           ),
           SingleChildScrollView(
@@ -49,22 +53,22 @@ class AuthScreen extends StatelessWidget {
                       // ..translate(-10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.deepOrange.shade900,
+                        color: Colors.blueAccent,
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 8,
-                            color: Colors.black26,
+                            color: Colors.white,
                             offset: Offset(0, 2),
                           )
                         ],
                       ),
                       child: Text(
-                        'MyShop',
+                        'The Henz',
                         style: TextStyle(
-                          color: Theme.of(context).accentTextTheme.title.color,
+                          color: Colors.white,
                           fontSize: 50,
                           fontFamily: 'Anton',
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -180,6 +184,7 @@ class _AuthCardState extends State<AuthCard> {
       ),
       elevation: 8.0,
       child: Container(
+
         height: _authMode == AuthMode.Signup ? 320 : 260,
         constraints:
             BoxConstraints(minHeight: _authMode == AuthMode.Signup ? 320 : 260),
@@ -188,7 +193,7 @@ class _AuthCardState extends State<AuthCard> {
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
-            child: Column(
+             child: Column(
               children: <Widget>[
                 TextFormField(
                   decoration: InputDecoration(labelText: 'E-Mail'),

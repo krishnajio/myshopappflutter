@@ -33,14 +33,14 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (context) => Cart()),
         ChangeNotifierProxyProvider<Auth,Orders>(
-          update: (ctx,auth,previoudOrders)=>Orders(auth.token,previoudOrders == null ? [] : previoudOrders.orders),
+          update: (ctx,auth,previoudOrders)=>Orders(auth.token, auth.userId,previoudOrders == null ? [] : previoudOrders.orders),
         ),
       ],
       child: Consumer<Auth>(
         builder: (ctx, authData, _) => MaterialApp(
           theme: ThemeData(
-            primarySwatch: Colors.purple,
-            accentColor: Colors.amber,
+            primarySwatch: Colors.blue,
+            accentColor: Colors.white,
           ),
           // home: ProductOverviewScreen(),
           home: authData.isAuth ? ProductOverviewScreen() : AuthScreen(),
