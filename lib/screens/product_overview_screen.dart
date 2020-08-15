@@ -94,7 +94,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
       drawer: AppDrawer(),
       body: _iLoading == true
           ? Center(
-              child: CircularProgressIndicator(),
+              child: SizedBox(width: 60, height: 80, child: CircularProgressIndicator(backgroundColor: Colors.blueAccent,)),
             )
           : ProductsGrid(_showOnlyFavourite),
     );
