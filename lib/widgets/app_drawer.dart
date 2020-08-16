@@ -42,10 +42,12 @@ class AppDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             leading:  Icon( Icons.exit_to_app),
-            title: Text('Go my products'),
+            title: Text('Log Out'),
             onTap: (){
               Navigator.of(context).pop();
-              Provider.of<Auth>(context).logoff();
+              Navigator.of(context).pushReplacementNamed('/');
+
+              Provider.of<Auth>(context,listen: false).logoff();
             },
           )
         ],
